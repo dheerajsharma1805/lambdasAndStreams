@@ -6,32 +6,67 @@ import main.java.com.dheeraj.expenseanalyzer.util.FilterExpense;
 import main.java.com.dheeraj.expenseanalyzer.util.SortExpense;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+
     public static void main(String[] args) {
+
         ExpenseManager manager = new ExpenseManager();
 
-        manager.addExpense(new Expense("1", "Milk", "Food", 60, LocalDate.now()));
-        manager.addExpense(new Expense("2", "Pizza", "Food", 400, LocalDate.now()));
-        manager.addExpense(new Expense("3", "Uber", "Travel", 250, LocalDate.now()));
+        // ---------- Sample Data ----------
+        manager.addExpense(new Expense(
+                "1", "Milk Packet", "Food", 60,
+                LocalDate.now(), List.of("Food", "Dairy")
+        ));
 
-        List<Expense> expensesList = new ArrayList<>(manager.getExpenses());
-        System.out.println("---- Above 100 ----");
+        manager.addExpense(new Expense(
+                "2", "Pizza", "Food", 400,
+                LocalDate.now(), List.of("Food", "Junk")
+        ));
+
+        manager.addExpense(new Expense(
+                "3", "Uber Ride", "Travel", 250,
+                LocalDate.now(), List.of("Travel", "Cab")
+        ));
+
+        manager.addExpense(new Expense(
+                "4", "Netflix", "Subscription", 199,
+                LocalDate.now(), List.of("Subscription", "Entertainment")
+        ));
+
+        // ---------- Get All Expenses ----------
+        System.out.println("\n===== ALL EXPENSES =====");
+        manager.getExpenses().forEach(System.out::println);
+
+        // ---------- Filter: Above Amount ----------
+        System.out.println("\n===== ABOVE 100 (filter + map) =====");
         FilterExpense filter = new FilterExpense();
-        filter.getExpenseAbove(expensesList, 100).forEach(System.out::println);
+        filter.getExpenseAbove(manager.getExpenses(), 100)
+                .forEach(System.out::println);
 
-        System.out.println("---- Grouped ----");
-        manager.groupByCategory().forEach((k,v) ->
+        // ---------- Group By Category ----------
+        System.out.println("\n===== GROUP BY CATEGORY =====");
+        manager.groupByCategory().forEach((k, v) ->
                 System.out.println(k + " -> " + v.size())
         );
 
-        System.out.println("---- Sorted by Amount ----");
-        SortExpense sort = new SortExpense();
-        sort.sortedByAmount(expensesList, " ").forEach(System.out::println);
+        // ---------- Total Spend Per Category ----------
+        System.out.println("\n===== TOTAL PER CATEGORY =====");
+        manager.totalAmountPerCategory().forEach((k, v) ->
+                System.out.println(k + " -> " + v)
+        );
 
+        // ---------- Sort By Amount ----------
+        System.out.println("\n===== SORTED BY AMOUNT =====");
+        SortExpense sort = new SortExpense();
+        sort.sortedByAmount(manager.getExpenses(), "desc")
+                .forEach(System.out::println);
+
+        // ---------- Total Spend (Reduce vs Sum) ----------
+        System.out.println("\n===== TOTAL SPEND =====");
+        System.out.println("Total (reduce): " + manager.getTotalSpendUsingReduce());
+        System.out.println("Total (sum):    " + manager.getTotalSpendUsingSum());
     }
 }

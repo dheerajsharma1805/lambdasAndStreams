@@ -11,7 +11,7 @@ public class SortExpense {
     public List<Expense> sortedByAmount(List<Expense> expenses, String sortType) {
         String sortTypeIgnoreCase = sortType.toLowerCase();
         return expenses.stream().sorted(
-                (e1, e2) -> sortTypeIgnoreCase == "desc" ?
+                (e1, e2) -> sortTypeIgnoreCase.equals("desc")  ?
                         Double.compare(e2.getAmount(), e1.getAmount()) : Double.compare(e1.getAmount(), e2.getAmount())
         ).toList();
     }
