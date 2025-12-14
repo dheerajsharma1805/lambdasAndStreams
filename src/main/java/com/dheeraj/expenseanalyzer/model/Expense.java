@@ -1,4 +1,4 @@
-package main.java.com.dheeraj.expenseanalyzer.model;
+package com.dheeraj.expenseanalyzer.model;
 
 import java.time.LocalDate;
 import java.util.List;

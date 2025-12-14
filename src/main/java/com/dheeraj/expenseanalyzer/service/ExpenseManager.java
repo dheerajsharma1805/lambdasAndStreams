@@ -1,6 +1,6 @@
-package main.java.com.dheeraj.expenseanalyzer.service;
+package com.dheeraj.expenseanalyzer.service;
 
-import main.java.com.dheeraj.expenseanalyzer.model.Expense;
+import com.dheeraj.expenseanalyzer.model.Expense;
 
 import java.util.*;
 import java.util.stream.Collectors;

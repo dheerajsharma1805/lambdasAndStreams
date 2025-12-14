@@ -1,9 +1,9 @@
-package main.java.com.dheeraj.expenseanalyzer;
+package com.dheeraj.expenseanalyzer;
 
-import main.java.com.dheeraj.expenseanalyzer.model.Expense;
-import main.java.com.dheeraj.expenseanalyzer.service.ExpenseManager;
-import main.java.com.dheeraj.expenseanalyzer.util.FilterExpense;
-import main.java.com.dheeraj.expenseanalyzer.util.SortExpense;
+import com.dheeraj.expenseanalyzer.model.Expense;
+import com.dheeraj.expenseanalyzer.service.ExpenseManager;
+import com.dheeraj.expenseanalyzer.util.FilterExpense;
+import com.dheeraj.expenseanalyzer.util.SortExpense;
 
 import java.time.LocalDate;
 import java.util.List;
